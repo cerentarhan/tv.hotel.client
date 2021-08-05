@@ -1,0 +1,76 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "TourVisio.WebService.Client/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "RestSharp": "106.12.0",
+          "TourVisio.WebService.Adapter": "1.0.50"
+        },
+        "runtime": {
+          "TourVisio.WebService.Client.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
+      "RestSharp/106.12.0": {
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.dll": {
+            "assemblyVersion": "106.12.0.0",
+            "fileVersion": "106.12.0.0"
+          }
+        }
+      },
+      "TourVisio.WebService.Adapter/1.0.50": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/TourVisio.WebService.Adapter.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TourVisio.WebService.Client/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "RestSharp/106.12.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-irOsQHe5nTJB0BKxGQnTX1dsgCPl5dLTxvL7gbl98JiFPiHMN4wpFyUG/66ZpaFCsIrPKh6XwozWXlwYe9JwYQ==",
+      "path": "restsharp/106.12.0",
+      "hashPath": "restsharp.106.12.0.nupkg.sha512"
+    },
+    "TourVisio.WebService.Adapter/1.0.50": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-K45v5hw3a++KQk64dtszMHFnCNUBl9XF/xLmX7c6631JxQR4lS4m0AULvUFiXxe5fAdKARxfDjpPKe9FM3PLjg==",
+      "path": "tourvisio.webservice.adapter/1.0.50",
+      "hashPath": "tourvisio.webservice.adapter.1.0.50.nupkg.sha512"
+    }
+  }
+}

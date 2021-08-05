@@ -1,0 +1,43 @@
+﻿@model LoginViewModel
+   
+@{
+    ViewData["Title"] = "Login";
+}
+
+<form method="post">
+    <div class="form-group">
+
+
+
+
+        <div class="form-group">
+            
+            <input type="text"  placeholder="Agency Name" size="15" asp-for="AgencyName" />
+            
+        </div>
+
+        
+            <input type="text" size="15" placeholder="User Name" asp-for="UserName" />
+        
+    </div>
+
+
+    <div class="form-group">
+
+        
+           <input type="password"  size="15" placeholder="Password" asp-for="Password" />
+        
+    </div>
+
+    
+    <button type="submit" class="btn btn-primary">       
+        Login
+    </button>
+</form>
+    <div class="text-danger" style="direction:rtl" asp-validation-summary="All"></div>
+
+
+
+
+
+

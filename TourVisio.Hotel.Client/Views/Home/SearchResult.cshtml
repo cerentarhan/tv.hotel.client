@@ -1,0 +1,41 @@
+﻿@model SearchResultModel
+
+@if (Model.ErrorMsg != null && Model.ErrorMsg != "")
+{
+    
+<div class="text-danger">@Model.ErrorMsg</div>
+
+}
+else
+{
+
+
+
+<h4>Hotels</h4>
+<hr />
+<table cellpadding="0" cellspacing="0" id="Hotels" style="width: 70%;">
+    <tr>
+        <td>HotelName</td>
+        <td></td>
+        <td>Location</td>
+        <td></td>
+        <td>Room</td>
+        <td></td>
+        <td>Price</td>
+    </tr>
+    @foreach (var hotel in Model.Hotels)
+    {
+<tr>
+    
+    <td>@hotel.Name</td>
+    <td></td>
+    <td>@hotel.City.Name</td>
+    <td></td>    
+    <td>@hotel.Offers[0].Rooms[0].RoomName / @hotel.Offers[0].Rooms[0].BoardName</td>
+    <td></td>  
+    <td>@hotel.Offers[0].Price.Amount  @hotel.Offers[0].Price.Currency</td>
+</tr>
+    }
+    
+</table>
+}

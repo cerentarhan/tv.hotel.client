@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "KNqVH5Stim7qUHOMOSGgPmfg7TPS4n/0FZxvowSnwxN0gW3av2TU0lCGE1T8gBuYsZIR8/xapZAqlsKyzgJe+g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\CEREN TARHAN\\source\\repos\\tv.hotel.client\\TourVisio.WebService.Client\\TourVisio.WebService.Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\CEREN TARHAN\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\CEREN TARHAN\\.nuget\\packages\\restsharp\\106.12.0\\restsharp.106.12.0.nupkg.sha512",
+    "C:\\Users\\CEREN TARHAN\\.nuget\\packages\\tourvisio.webservice.adapter\\1.0.50\\tourvisio.webservice.adapter.1.0.50.nupkg.sha512"
+  ],
+  "logs": []
+}

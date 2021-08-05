@@ -1,0 +1,421 @@
+﻿@model IndexViewModel
+
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser>  UserManager
+
+
+@{
+    ViewData["Title"] = "Home Page";
+
+  
+
+
+
+}
+
+@if (User.Identity.IsAuthenticated)
+ {
+    <h1>@User.Identity.Name</h1>
+ }
+else
+ {
+    <h5>Unauthorised</h5>
+ }
+<div>
+    @{       
+        ViewData["Title"] = "Anasayfa";
+        <div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a asp-controller="Account" asp-action="Logout">Logout</a>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login">Login</a>
+            }
+        </div>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form action=" /form/submit" method="get">
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <br>Location:<br>
+                        <input type="text" style="width:400px" name="Location" class=" search">
+                        <input type="hidden" name="LocationId">
+                        <input type="hidden" name="LocationType">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>Check in date: <br>
+                        <input type="date" id="CheckInDate" name="CheckInDate" style="width:200px" />
+                    </td>
+                    <td colspan="2">
+                        <br>Check out date:<br>
+                        <input type="date" id="CheckOutDate" name="CheckOutDate" style="width:200px" />
+                    </td>
+                    <td colspan="2">
+                        <br>Currency:<br>
+                        <select name="Currency" style="width:200px">
+                            @foreach (var cur in Model.Currencies)
+                            {
+                                <option value="@cur.Code">@cur.Name</option>
+                            }
+
+                        </select>
+                    </td>
+                    <td colspan="2">
+                        <br>Nationality:<br>
+                        <select name="Nationality" style="width:200px">
+                            @foreach (var nat in Model.Nationalities)
+                            {
+                                <option value="@nat.ISDCode">@nat.Name</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr name="roomRow1">
+                    <td>
+                        Room: <br>
+                        <select name="Room" style="width:200px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </td>
+                    <td>
+                        Adult: <br>
+                        <select name="Adult1" style="width:100px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </td>
+                    <td>
+                        Childs: <br>
+                        <select name="Child1" style="width:100px">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age1: <br>
+                        <select name="ChildAge11" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age2: <br>
+                        <select name="ChildAge12" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age3:<br>
+                        <select name="ChildAge13" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age4: <br>
+                        <select name="ChildAge14" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr name="roomRow2" style="display: none;">
+                    <td></td>
+                    <td>
+                        Adult: <br>
+                        <select name="Adult2" style="width:100px" default disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </td>
+                    <td>
+                        Childs: <br>
+                        <select name="Child2" style="width:100px" disabled>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age1: <br>
+                        <select name="ChildAge21" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age2: <br>
+                        <select name="ChildAge22" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age3:<br>
+                        <select name="ChildAge23" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age4: <br>
+                        <select name="ChildAge24" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr name="roomRow3" style="display:none">
+                    <td></td>
+                    <td>
+                        Adult: <br>
+                        <select name="Adult3" style="width:100px" default disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </td>
+                    <td>
+                        Childs: <br>
+                        <select name="Child3" style="width:100px" disabled>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age1: <br>
+                        <select name="ChildAge31" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age2: <br>
+                        <select name="ChildAge32" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age3:<br>
+                        <select name="ChildAge33" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age4: <br>
+                        <select name="ChildAge34" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr name=" roomRow4" style=" display:none">
+                    <td></td>
+                    <td>
+                        Adult: <br>
+                        <select name="Adult4" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </td>
+                    <td>
+                        Childs: <br>
+                        <select name="Child4" style="width:100px" disabled>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4 </option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age1: <br>
+                        <select name="ChildAge41" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age2: <br>
+                        <select name="ChildAge42" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age3:<br>
+                        <select name="ChildAge43" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td>
+                        Child Age4: <br>
+                        <select name="ChildAge44" style="width:100px" disabled>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </form>
+        <br>
+        <br>
+        <button name="btnPost" type="submit" class="btn btn-primary">
+            Search
+        </button>
+    }
+    <br>
+    <br>
+
+    <div id="searchResult">
+        
+    </div>
