@@ -183,7 +183,6 @@ $(document).ready(function () {
                     error: function (response) {
                         alert(response.responseText);
                     }
-
                     
                 });
                
