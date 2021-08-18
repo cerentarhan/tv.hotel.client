@@ -1,0 +1,109 @@
+﻿@model ReservationModel
+@using Newtonsoft.Json;
+
+<h2 style="color:blue">Passenger Information</h2>
+
+@{ var rindex = 1; }
+
+<input type="hidden" name="RoomCount" value="@(Model.Rooms.Count())">
+<input type="hidden" name="TransactionId" value="@(Model.TransactionResponse.TransactionId)">
+<input type="hidden" name="Currency" value="@(Model.TransactionResponse.ReservationData.ReservationInfo.SalePrice.Currency)">
+<input type="hidden" name="AgencyReservationNumber" value="@(Model.TransactionResponse.ReservationData.ReservationInfo.AgencyReservationNumber)">
+<input type="hidden" name="ReservationInfo" value="@(JsonConvert.SerializeObject(Model.TransactionResponse.ReservationData.ReservationInfo))" >
+<input type="hidden" name="CustomeInfo" value="@(Model.TransactionResponse.ReservationData.CustomerInfo)" >
+@foreach (var roomingBlock in Model.Rooms)
+{
+    <input type="hidden" name="TravellerCount@(rindex)" value="@(roomingBlock.Travellers.Count())">
+
+    <h4 style="color:cornflowerblue ">Room @roomingBlock.RoomNumber</h4>
+    var tindex = 1;
+    @foreach (var traveller in roomingBlock.Travellers)
+    {
+
+        <h4 style="color:lightskyblue">Traveller @tindex (@traveller.PassengerType)</h4>
+        <table>
+            <tr>
+                <td>
+                    Title:<br />
+                    <select name="title@(rindex)@(tindex)" style="width:200px">
+                        <option value="1">Mr</option>
+                        <option value="2">Ms</option>
+                        <option value="3">Mrs</option>
+                        <option value="4">Miss</option>
+                    </select>
+                </td>
+                <td>
+                    Name:<br/>
+                    <input type="text" style="width:200px" name="Name@(rindex)@(tindex)">
+                </td>
+                <td>
+                    Surname:<br/>
+                    <input type="text" style="width:200px" name="Surname@(rindex)@(tindex)">
+                </td>
+                <td>
+                    Nationality:<br/>
+                    <select name="Nationality@(rindex)@(tindex)" style="width:200px">
+                        @foreach (var nat in Model.Nationalities)
+                    {
+                        <option value="@nat.Id">@nat.Name</option>
+                    }
+                    </select> 
+                 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Code:<br/>
+                    <select name="Code@(rindex)@(tindex)" style="width:200px">
+                        @foreach (var code in Model.Nationalities)
+                        {
+                            <option value="@(code.ISDCode)">@code.Name +(@code.ISDCode)</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    Phone Number:<br/>
+                    <input type="text" style="width:200px" name="PhoneNumber@(rindex)@(tindex)">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Passport no:<br/>
+                    <input type="text" style="width:200px" name="PassportNo@(rindex)@(tindex)">
+                </td>
+                <td>
+                    Expire Date:<br/>
+                    <input type="date" style="width:200px" name="ExpireDate@(rindex)@(tindex)">
+                </td>
+                <td>
+                    Issue Date:<br/>
+                    <input type="date" style="width:200px" name="IssueDate@(rindex)@(tindex)">
+                </td>
+                <td>
+                    Issue Country:<br/>
+                    <select name="IssueCountry@(rindex)@(tindex)" style="width:200px">
+                        @foreach (var country in Model.Nationalities)
+                        {
+                            <option value="@country.Id">@country.Name</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        tindex++;
+    }
+    rindex++;
+}
+
+    <button name="btnBook" type="button" class="btn btn-primary book">
+        Book
+    </button>

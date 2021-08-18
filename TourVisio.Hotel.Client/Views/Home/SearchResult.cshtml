@@ -14,28 +14,79 @@ else
 <h4>Hotels</h4>
 <hr />
 <table cellpadding="0" cellspacing="0" id="Hotels" style="width: 70%;">
-    <tr>
-        <td>HotelName</td>
+    <tr style="color: cornflowerblue;">
+        <td><b>HotelName</b></td>
         <td></td>
-        <td>Location</td>
+        <td><b>Location</b></td>
         <td></td>
-        <td>Room</td>
+        <td><b>Room</b></td>
         <td></td>
-        <td>Price</td>
+        <td><b>Price</b></td>
     </tr>
     @foreach (var hotel in Model.Hotels)
     {
-<tr>
-    
-    <td>@hotel.Name</td>
-    <td></td>
-    <td>@hotel.City.Name</td>
-    <td></td>    
-    <td>@hotel.Offers[0].Rooms[0].RoomName / @hotel.Offers[0].Rooms[0].BoardName</td>
-    <td></td>  
-    <td>@hotel.Offers[0].Price.Amount  @hotel.Offers[0].Price.Currency</td>
-</tr>
+
+        <tr class="hotel" id="@hotel.Id">
+
+            <td href="#">@hotel.Name</td>
+            <td></td>
+            <td>@hotel.City.Name</td>
+            <td></td>
+            <td>@hotel.Offers[0].Rooms[0].RoomName </td>
+            <td></td>
+            <td>@hotel.Offers[0].Rooms[0].BoardName</td>
+            <td></td>
+            <td>@hotel.Offers[0].Price.Amount </td>
+            <td></td>
+            <td>@hotel.Offers[0].Price.Currency</td>
+        </tr>
+
+        <tr name="offers@(hotel.Id)" style="display:none">
+
+            <td colspan="7" align="right">
+                <table>
+
+                    <tr>
+                        <td><b>RoomName</b></td>
+                        <td></td>
+                        <td><b>BoardName</b></td>
+                        <td></td>
+                        <td><b>Price</b></td>
+                        <td></td>
+                        <td><b>Currency</b></td>
+                    </tr>
+                    @foreach (var offer in hotel.Offers)
+                    {
+                        <tr>
+                            <td>
+                                @foreach (var rooms in offer.Rooms)
+                                {
+                                    @rooms.RoomName 
+                                }
+                            </td>
+                            <td>
+                            <td align="right">@offer.Rooms[0].BoardName</td>
+                            
+                            <td></td>
+                            <td align="right">@offer.Price.Amount</td>
+
+                            <td></td>
+                            <td align="center">@offer.Price.Currency</td>                 
+                            <td></td>
+
+                            <td>
+                                <button name="btnPost" type="button" class="btn btn-primary book" offerId="@offer.OfferId" >
+                                    Book
+                                </button>
+                            </td>
+
+                        </tr>
+                    }
+                  
+                </table>
+            </td>
+        </tr>
     }
-    
+
 </table>
 }
