@@ -111,7 +111,6 @@
                         default:
                             break;
                     }
-
                     return {
                         label: name,
                         value: id
@@ -218,6 +217,8 @@
         var customerInfo = $("[name='CustomerInfo']").val();
         resForm.CustomerInfo = customerInfo;
 
+        var birthDate = $("[name='BirthDate']").val();
+        resForm.BirthDate = birthDate;
         var rooms = new Array();
 
         for (var r = 1; r <= roomCount; r++) {
@@ -238,7 +239,8 @@
                 traveller.ExpireDate = $("[name='ExpireDate" + r + t + "']").val();
                 traveller.IssueDate = $("[name='IssueDate" + r + t + "']").val();
                 traveller.IssueCountry = $("[name='IssueCountry" + r + t + "']").val();
-
+                traveller.travellerId = $("[name='TravellerId" + r + t + "']").val();
+                traveller.BirthDate = $("[name='BirthDate" + r + t + "']").val();
                 travellers.push(traveller);
             }
             room.Travellers = travellers;
@@ -251,9 +253,13 @@
                 url: "/Home/Booking",
                 data: JSON.stringify(resForm),
                 contentType: "application/json; charset=utf-8",
-                dataType: "html",
-                success: function(response) {
-                    $('#reservationResult').html(response);
+                dataType: "json",
+                success: function (response) {
+                    if (response.transactionId != null) {
+                        window.location.href = "/Home/Result?transactionId=" + response.transactionId;
+                    } else {
+                        alert(response.error);
+                    }
                 },
                 failure: function(response) {
                     alert(response.responseText);

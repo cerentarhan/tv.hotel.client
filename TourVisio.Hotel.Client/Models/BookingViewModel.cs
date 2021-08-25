@@ -17,5 +17,6 @@ namespace TourVisio.Hotel.Client.Models
         public string AgencyReservationNumber { get; set; }
         public string ReservationInfo { get; set; }
         public mdlCustomerInfo CustomerInfo { get; set; }
+       
     }
 }

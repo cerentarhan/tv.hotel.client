@@ -146,6 +146,7 @@ C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\De
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\Razor\Views\Home\Reservation.cshtml.g.cs
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\Razor\Views\Home\SearchResult.cshtml.g.cs
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -160,3 +161,4 @@ C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\De
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\ref\TourVisio.Hotel.Client.dll
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\TourVisio.Hotel.Client.pdb
 C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\TourVisio.Hotel.Client.genruntimeconfig.cache
+C:\Users\CEREN TARHAN\source\repos\tv.hotel.client\TourVisio.Hotel.Client\obj\Debug\net5.0\Razor\Views\Home\Result.cshtml.g.cs

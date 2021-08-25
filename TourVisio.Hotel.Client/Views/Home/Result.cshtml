@@ -1,0 +1,115 @@
+﻿
+@model ResultModelView
+
+
+@if (Model.ErrorMsg != null && Model.ErrorMsg != "")
+{
+
+    <div class="text-danger">@Model.ErrorMsg</div>
+
+}
+else
+{
+    <h3 style="color:blue">Reservation is Successful  (Booking Number:@Model.BookingNumber)</h3>
+
+    <br>
+    <h5 style="color:deepskyblue">Hotel Details</h5>
+    <table>
+        <tr>
+
+            <td></td>
+            <td style="color:cornflowerblue"><b>HotelName</b></td>
+
+            <td></td>
+            <td style="color:cornflowerblue"><b>CityName</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>RoomType</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>RoomBoards</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>Price</b></td>
+
+        </tr>
+
+        @foreach (var service in Model.Services)
+        {
+            <tr>
+                <td></td>
+                <td>@service.ServiceDetails.HotelDetail.Name</td>
+                <td></td>
+                <td>@service.ServiceDetails.HotelDetail.Location.Name</td>
+                <td></td>
+                <td>@service.ServiceDetails.Room</td>
+                <td></td>
+                <td>@service.ServiceDetails.Board</td>
+                <td></td>
+                <td>@service.NetPrice</td>
+                <td></td>
+
+            </tr>
+
+        }
+
+    </table>
+    <br>
+    <h5 style="color:deepskyblue">Travellers</h5>
+
+    <table>
+        <tr>
+
+            <td style="color:cornflowerblue"><b>Name</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>Surname</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>Nationality</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>PassengerType</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>PhoneNumber</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>BirthDate</b></td>
+
+        </tr>
+        @foreach (var trav in Model.Travellers)
+        {
+            <tr>
+
+                <td>@trav.Name</td>
+                <td></td>
+                <td>@trav.Surname</td>
+                <td></td>
+                <td>@trav.Nationality.Name</td>
+                <td></td>
+                <td>@trav.PassengerType</td>
+                <td></td>
+                <td>@trav.Address.ContactPhone.CountryCode @trav.Address.ContactPhone.PhoneNumber</td>
+                <td></td>
+                <td>@(trav.BirthDate.HasValue ? trav.BirthDate.Value.ToString("dd.MM.yyyy") : "")</td>
+
+
+            </tr>
+
+        }
+
+        <tr>
+            <td style="color:cornflowerblue"><b>PassportNo</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>IssueDate</b></td>
+            <td></td>
+            <td style="color:cornflowerblue"><b>ExpireDate</b></td>
+        </tr>
+
+
+        @foreach (var trav in Model.Travellers)
+        {
+            <tr>
+                <td>@trav.PassportInfo.Number</td>
+                <td></td>
+
+                <td>@(trav.PassportInfo.IssueDate.HasValue ? trav.PassportInfo.IssueDate.Value.ToString("dd.MM.yyyy") : "" ) </td>
+                <td></td>
+                <td>@(trav.PassportInfo.ExpireDate.HasValue ? trav.PassportInfo.ExpireDate.Value.ToString("dd.MM.yyyy") : "" )</td>
+            </tr>
+        }
+    </table>
+}

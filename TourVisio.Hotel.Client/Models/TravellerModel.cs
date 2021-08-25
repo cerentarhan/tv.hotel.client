@@ -1,4 +1,5 @@
-﻿using TourVisio.WebService.Adapter.Models.Booking;
+﻿using System;
+using TourVisio.WebService.Adapter.Models.Booking;
 
 namespace TourVisio.Hotel.Client.Models
 {
@@ -6,7 +7,6 @@ namespace TourVisio.Hotel.Client.Models
     {
         public int Title { get; set; }
         public string Name { get; set; }
-
         public string Surname { get; set; }
         public string Nationality { get; set; }
         public string Code { get; set; }
@@ -15,6 +15,7 @@ namespace TourVisio.Hotel.Client.Models
         public string ExpireDate { get; set; }
         public string IssueDate { get; set; }
         public string IssueCountry { get; set; }
-    
+        public string TravellerId { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 }

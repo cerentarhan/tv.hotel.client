@@ -75,7 +75,7 @@ namespace TourVisio.Hotel.Client.Controllers
                 ProductRepository productRepo = new ProductRepository(User.Claims.First().Value, "https://t3-services.tourvisio.com/v2/");
                 var rResponse2 = productRepo.GetArrivalAutoComplete(pRequest2);
 
-                if (rResponse2.Header.Success)
+                 if (rResponse2.Header.Success)
                 {
                     return Json(rResponse2.Body.Items);
                 }
@@ -92,7 +92,7 @@ namespace TourVisio.Hotel.Client.Controllers
             {
                 var roomCriteria = new List<mdlRoomCriteria>();
                 var room1 = new mdlRoomCriteria();
-                room1.Adult = searchForm.Adult1;
+                  room1.Adult = searchForm.Adult1;
                 var childAges1 = new List<int>();
                 if (searchForm.Child1 > 0)
                 {
@@ -206,7 +206,6 @@ namespace TourVisio.Hotel.Client.Controllers
 
                 var pRequest3 = new PriceSearchRequest()
                 {
-
                     Nationality = searchForm.Nationality,
                     CheckIn = checkIn,
                     Night = (checkOut - checkIn).Days,
@@ -269,6 +268,7 @@ namespace TourVisio.Hotel.Client.Controllers
                         OfferIds = new string[] { offerId },
                         Currency = currency
                     };
+
                     BookingRepository booking = new BookingRepository(User.Claims.First().Value, "https://t3-services.tourvisio.com/v2/");
                     var rResponse5 = booking.BeginTransaction(pRequest5);
                     if (rResponse5.Header.Success)
@@ -280,17 +280,19 @@ namespace TourVisio.Hotel.Client.Controllers
                         LookupRepository lookup1 = new LookupRepository(User.Claims.First().Value, "https://t3-services.tourvisio.com/v2/");
                         var rResponse1 = lookup1.GetNationalities(pRequest6);
 
+
                         if (rResponse1.Header.Success)
                         {
                             result.Nationalities = rResponse1.Body.Nationalities;
                         }
                         return View(result);
-                    }
-                    else
-                    {
-                        result.ErrorMsg = rResponse5.Header.Messages.First().Message;
-                    }
+                    }                       
+                else
+                {
+                    result.ErrorMsg = rResponse5.Header.Messages.First().Message;
                 }
+                }
+             
                 else
                 {
                     result.ErrorMsg = rResponse4.Header.Messages.First().Message;
@@ -307,7 +309,6 @@ namespace TourVisio.Hotel.Client.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
         public IEnumerable<mdlTraveller> GetTravellers(string[] pTravellers, TransactionResponse pTransactionResponse)
         {
             return pTransactionResponse.ReservationData.Travellers.Where(w => pTravellers.Contains(w.TravellerId));
@@ -334,6 +335,7 @@ namespace TourVisio.Hotel.Client.Controllers
         [HttpPost]
         public ActionResult Booking([FromBody] BookingViewModel resForm)
         {
+            BookingReservationModel b1 = new BookingReservationModel();
             if (User != null && User.Identity.IsAuthenticated)
             {
                 var pRequest = new SetReservationInfoRequest();
@@ -356,6 +358,8 @@ namespace TourVisio.Hotel.Client.Controllers
                         trv.Title = (enmTitle)trav.Title;
                         trv.Name = trav.Name;
                         trv.Surname = trav.Surname;
+                        trv.TravellerId = trav.TravellerId;
+                        trv.BirthDate = trav.BirthDate;
                         var nationality = new mdlNationality();
                         nationality.TwoLetterCode = trav.Nationality;
                         trv.Nationality = nationality;
@@ -381,17 +385,73 @@ namespace TourVisio.Hotel.Client.Controllers
                 }
                 pRequest.Travellers = travellers.ToArray();
 
-                BookingRepository booking = new BookingRepository(User.Claims.First().Value, "http://localhost:3332/");
+                BookingRepository booking = new BookingRepository(User.Claims.First().Value, "https://t3-services.tourvisio.com/v2/");
                 var rResponse = booking.SetReservationInfo(pRequest);
 
-                BookingRoomBlock t1 = new BookingRoomBlock();
                 if (rResponse.Header.Success)
                 {
-
+                    b1.TransactionId = rResponse.Body.TransactionId.ToString();
+                    
                 }
-                return View(t1);
+                else
+                {
+                    b1.ErrorMsg = rResponse.Header.Messages.First().Message;
+                }
+            
             }
-            return View();
+            else
+            {
+                b1.ErrorMsg = "Please login first!!!";
+            }
+            return Json(b1);
+        }
+        [HttpGet]
+        public IActionResult Result(string transactionId)
+        {
+
+            ResultModelView r1 = new ResultModelView(); 
+
+            if (User != null && User.Identity.IsAuthenticated)
+            {
+                var pRequest = new CommitTransactionRequest();
+                pRequest.TransactionId = Guid.Parse(transactionId);
+                BookingRepository booking = new BookingRepository(User.Claims.First().Value, "https://t3-services.tourvisio.com/v2/");
+                var rResponse = booking.CommitTransaction(pRequest);
+
+                if (rResponse.Header.Success) 
+                {
+                    r1.TransactionId = rResponse.Body.TransactionId.ToString();
+                    r1.BookingNumber = rResponse.Body.ReservationNumber;
+
+                    var pRequest1 = new GetReservationDetailRequest();
+                    pRequest1.ReservationNumber = rResponse.Body.ReservationNumber;
+                    var rResponse1 = booking.GetReservationDetail(pRequest1);
+
+                  
+                    
+                    if (rResponse1.Header.Success)
+                    {
+                        r1.Travellers = rResponse1.Body.ReservationData.Travellers;
+                        r1.Services = rResponse1.Body.ReservationData.Services;
+                        r1.TotalPrice = rResponse1.Body.ReservationData.ReservationInfo.TotalPrice;
+                       
+                    }
+                    else
+                    {
+                        r1.ErrorMsg = rResponse1.Header.Messages.First().Message;
+                    }
+                }
+                else
+                {
+                    r1.ErrorMsg = rResponse.Header.Messages.First().Message;
+                }
+            }
+            else
+            {
+                r1.ErrorMsg = "Please login first!!!";
+            }
+
+               return View(r1);
         }
     }
 }

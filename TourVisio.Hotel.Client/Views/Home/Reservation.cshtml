@@ -33,22 +33,25 @@
                     </select>
                 </td>
                 <td>
-                    Name:<br/>
+                    Name:<br />
                     <input type="text" style="width:200px" name="Name@(rindex)@(tindex)">
                 </td>
                 <td>
-                    Surname:<br/>
+                    Surname:<br />
                     <input type="text" style="width:200px" name="Surname@(rindex)@(tindex)">
                 </td>
                 <td>
-                    Nationality:<br/>
+                    Nationality:<br />
                     <select name="Nationality@(rindex)@(tindex)" style="width:200px">
                         @foreach (var nat in Model.Nationalities)
-                    {
-                        <option value="@nat.Id">@nat.Name</option>
-                    }
-                    </select> 
-                 
+                        {
+                            <option value="@nat.Id">@nat.Name</option>
+                        }
+                    </select>
+
+                </td>
+                <td>
+                <input type="hidden" name="TravellerId@(rindex)@(tindex)" value="@traveller.TravellerId">
                 </td>
             </tr>
             <tr>
@@ -68,6 +71,11 @@
                 <td>
                     Phone Number:<br/>
                     <input type="text" style="width:200px" name="PhoneNumber@(rindex)@(tindex)">
+                </td>
+                <td>
+                    BirthDate:<br/>
+                    <input type="date" style="width:200px" name="BirthDate@(rindex)@(tindex)">
+                    
                 </td>
             </tr>
             <tr>
